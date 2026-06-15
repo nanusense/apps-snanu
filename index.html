@@ -108,6 +108,18 @@
             animation: up 0.7s 0.18s ease both;
         }
 
+        .sub-note {
+            margin-top: 0.6rem;
+            font-size: 0.67rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+            animation: up 0.7s 0.24s ease both;
+        }
+
+        .sub-note-highlight {
+            color: var(--accent);
+        }
+
         /* Categories */
         .category { margin-bottom: 3rem; }
         .category:nth-child(1) { animation: up 0.6s 0.22s ease both; }
@@ -143,6 +155,11 @@
             gap: 1px;
             background: var(--border);
             border: 1px solid var(--border);
+        }
+
+        .app-grid::after {
+            content: '';
+            background: var(--bg);
         }
 
         /* Card */
@@ -260,12 +277,20 @@
         .card:hover .card-url { opacity: 1; }
 
         /* Featured */
-        .card--featured { background: rgba(232, 255, 71, 0.04); }
-        .card--featured::before { transform: scaleY(1); opacity: 0.8; }
-        .card--featured:hover::before { opacity: 1; }
-        .card--featured .card-num { color: rgba(232, 255, 71, 0.08); }
-        .card--featured:hover .card-num { color: rgba(232, 255, 71, 0.12); }
-        .card--featured .card-name { color: var(--accent); }
+        .card--featured { background: var(--accent); }
+        .card--featured:hover { background: #f0ff6a; }
+        .card--featured::before { background: #0B0B0B; transform: scaleY(1); opacity: 0.5; }
+        .card--featured:hover::before { opacity: 0.8; }
+        .card--featured .card-num { color: rgba(0,0,0,0.07); }
+        .card--featured:hover .card-num { color: rgba(0,0,0,0.11); }
+        .card--featured .card-name { color: #0B0B0B; }
+        .card--featured:hover .card-name { color: #0B0B0B; }
+        .card--featured .card-desc { color: rgba(0,0,0,0.6); }
+        .card--featured .card-date { color: rgba(0,0,0,0.38); }
+        .card--featured .card-url { color: #0B0B0B; opacity: 0.55; }
+        .card--featured:hover .card-url { opacity: 0.9; }
+        .card--featured .card-icon { color: rgba(0,0,0,0.4); }
+        .card--featured:hover .card-icon { color: #0B0B0B; }
 
         /* Footer */
         footer {
@@ -311,6 +336,7 @@
         <p class="label"><span class="label-line"></span>snanu / apps</p>
         <h1>things<br>i've <span class="accent">built.</span></h1>
         <p class="sub">A growing collection of small, useful things - from someone who can't stop building.</p>
+        <p class="sub-note">My favourites are <span class="sub-note-highlight">highlighted</span>.</p>
     </header>
 
     <!-- Personal & Tools -->
