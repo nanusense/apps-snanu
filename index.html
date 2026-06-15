@@ -9,6 +9,7 @@
     <meta property="og:description" content="Keeping up with the Nanu Vibe.">
     <meta property="og:url" content="https://apps.snanu.com">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230B0B0B'/><text y='.85em' font-size='70' fill='%23E8FF47'>N</text></svg>">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3VDFJLGVJ"></script>
     <script>
@@ -43,11 +44,9 @@
             font-family: 'Manrope', sans-serif;
             min-height: 100vh;
             padding: 0 1.5rem;
-            /* subtle noise grain */
             position: relative;
         }
 
-        /* grain overlay */
         body::after {
             content: '';
             position: fixed;
@@ -60,16 +59,16 @@
         }
 
         .wrap {
-            max-width: 680px;
+            max-width: 740px;
             margin: 0 auto;
             padding: 5.5rem 0 4rem;
         }
 
-        /* ── Header ── */
+        /* Header */
         header { margin-bottom: 4.5rem; }
 
         .label {
-            font-size: 0.64rem;
+            font-size: 0.58rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--muted-2);
@@ -102,78 +101,70 @@
         h1 .accent { color: var(--accent); }
 
         .sub {
-            font-size: 0.86rem;
+            font-size: 0.8rem;
             color: var(--muted-2);
             line-height: 1.8;
             max-width: 44ch;
             animation: up 0.7s 0.18s ease both;
         }
 
-        /* ── List ── */
-        .list {
-            border-top: 1px solid var(--border-top);
+        /* Categories */
+        .category { margin-bottom: 3rem; }
+        .category:nth-child(1) { animation: up 0.6s 0.22s ease both; }
+        .category:nth-child(2) { animation: up 0.6s 0.32s ease both; }
+        .category:nth-child(3) { animation: up 0.6s 0.42s ease both; }
+        .category:nth-child(4) { animation: up 0.6s 0.52s ease both; }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 0.75rem;
         }
 
-        .item {
+        .category-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted-2);
+            white-space: nowrap;
+        }
+
+        .category-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-top);
+        }
+
+        /* Card Grid */
+        .app-grid {
             display: grid;
-            grid-template-columns: 2.75rem 2.25rem 1fr auto;
-            align-items: center;
-            column-gap: 1.1rem;
-            padding: 1.4rem 0;
-            border-bottom: 1px solid var(--border);
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        /* Card */
+        .card {
+            display: flex;
+            flex-direction: column;
+            padding: 1.25rem;
+            background: var(--bg);
             text-decoration: none;
             color: inherit;
             position: relative;
-            animation: up 0.55s ease both;
-            cursor: pointer;
+            overflow: hidden;
+            transition: background 0.2s;
+            min-height: 160px;
         }
 
-        .item:nth-child(1) { animation-delay: 0.22s; }
-        .item:nth-child(2) { animation-delay: 0.30s; }
-        .item:nth-child(3) { animation-delay: 0.38s; }
-        .item:nth-child(4) { animation-delay: 0.46s; }
-        .item:nth-child(5) { animation-delay: 0.54s; }
-        .item:nth-child(6) { animation-delay: 0.62s; }
-        .item:nth-child(7) { animation-delay: 0.70s; }
-        .item:nth-child(8) { animation-delay: 0.78s; }
-        .item:nth-child(9)  { animation-delay: 0.86s; }
-        .item:nth-child(10) { animation-delay: 0.94s; }
-        .item:nth-child(11) { animation-delay: 1.02s; }
-        .item:nth-child(12) { animation-delay: 1.10s; }
-        .item:nth-child(13) { animation-delay: 1.18s; }
-        .item:nth-child(14) { animation-delay: 1.26s; }
+        .card:hover { background: #111111; }
 
-        /* featured highlight */
-        .item--featured {
-            background: rgba(232, 255, 71, 0.04);
-            margin: 0 -1.5rem;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        .item--featured .item-num {
-            color: var(--accent);
-        }
-
-        .item--featured .item-name {
-            color: var(--accent);
-        }
-
-        .item--featured::before {
-            transform: scaleY(1);
-            opacity: 0.8;
-        }
-
-        .item--featured:hover::before {
-            opacity: 1;
-        }
-
-        /* accent left bar */
-        .item::before {
+        .card::before {
             content: '';
             position: absolute;
-            left: -1.5rem;
-            top: 0; bottom: 0;
+            left: 0; top: 0; bottom: 0;
             width: 2px;
             background: var(--accent);
             transform: scaleY(0);
@@ -181,93 +172,104 @@
             transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
         }
 
-        .item:hover::before { transform: scaleY(1); }
+        .card:hover::before { transform: scaleY(1); }
 
-        /* number */
-        .item-num {
-            font-size: 0.68rem;
-            color: var(--muted);
-            letter-spacing: 0.04em;
-            font-weight: 400;
-            padding-top: 0.1rem;
+        /* Big decorative number */
+        .card-num {
+            position: absolute;
+            bottom: -0.3rem;
+            right: 0.6rem;
+            font-size: 5.5rem;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            line-height: 1;
+            color: rgba(255,255,255,0.045);
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            transition: color 0.2s;
         }
 
-        /* icon */
-        .item-icon {
+        .card:hover .card-num {
+            color: rgba(255,255,255,0.065);
+        }
+
+        /* Card content sits above the number */
+        .card-top {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted-2);
-            transition: color 0.25s ease;
+            justify-content: flex-end;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .item:hover .item-icon { color: var(--accent); }
+        .card-icon {
+            color: var(--muted-2);
+            transition: color 0.25s;
+        }
 
-        /* content */
-        .item-content { min-width: 0; }
+        .card:hover .card-icon { color: var(--accent); }
 
-        .item-name {
+        .card-name {
             font-family: 'Manrope', sans-serif;
             font-weight: 700;
             font-size: 0.97rem;
             letter-spacing: -0.01em;
             color: var(--text);
-            margin-bottom: 0.28rem;
-            transition: color 0.2s ease;
+            margin-bottom: 0.35rem;
+            transition: color 0.2s;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
         }
 
-        .item:hover .item-name { color: var(--accent); }
+        .card:hover .card-name { color: var(--accent); }
 
-        .item-desc {
-            font-size: 0.80rem;
+        .card-desc {
+            font-size: 0.79rem;
             color: var(--muted-2);
             line-height: 1.6;
+            flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
-        /* right meta */
-        .item-right {
+        .card-footer {
+            margin-top: 0.85rem;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 0.35rem;
-            padding-left: 1rem;
+            gap: 0.2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .item-url {
-            font-size: 0.71rem;
+        .card-date {
+            font-size: 0.67rem;
             color: var(--muted);
-            letter-spacing: 0.03em;
-            white-space: nowrap;
-            transition: color 0.2s;
+            letter-spacing: 0.02em;
         }
 
-        .item:hover .item-url { color: var(--muted-2); }
-
-        .item-date {
-            font-size: 0.66rem;
-            color: var(--muted);
-            letter-spacing: 0.03em;
-            margin-top: 0.4rem;
-            display: block;
-        }
-
-        .item-arrow {
-            color: var(--muted);
-            opacity: 0;
-            transform: translate(-3px, 3px);
-            transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-            display: flex;
-        }
-
-        .item:hover .item-arrow {
-            opacity: 1;
-            transform: translate(0, 0);
+        .card-url {
+            font-size: 0.67rem;
             color: var(--accent);
+            opacity: 0.6;
+            letter-spacing: 0.02em;
+            transition: opacity 0.2s;
         }
 
-        /* ── Footer ── */
+        .card:hover .card-url { opacity: 1; }
+
+        /* Featured */
+        .card--featured { background: rgba(232, 255, 71, 0.04); }
+        .card--featured::before { transform: scaleY(1); opacity: 0.8; }
+        .card--featured:hover::before { opacity: 1; }
+        .card--featured .card-num { color: rgba(232, 255, 71, 0.08); }
+        .card--featured:hover .card-num { color: rgba(232, 255, 71, 0.12); }
+        .card--featured .card-name { color: var(--accent); }
+
+        /* Footer */
         footer {
-            margin-top: 3rem;
+            margin-top: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -275,13 +277,13 @@
         }
 
         .footer-note {
-            font-size: 0.71rem;
+            font-size: 0.65rem;
             color: var(--muted);
             letter-spacing: 0.08em;
         }
 
         .footer-link {
-            font-size: 0.71rem;
+            font-size: 0.65rem;
             color: var(--muted);
             text-decoration: none;
             letter-spacing: 0.05em;
@@ -290,21 +292,15 @@
 
         .footer-link:hover { color: var(--accent); }
 
-        /* ── Animation ── */
         @keyframes up {
             from { opacity: 0; transform: translateY(14px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Mobile ── */
         @media (max-width: 560px) {
             .wrap { padding: 3.5rem 0 3rem; }
             h1 { font-size: 2.8rem; }
-            .item {
-                grid-template-columns: 2rem 2rem 1fr;
-                column-gap: 0.75rem;
-            }
-            .item-right { display: none; }
+            .app-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -317,371 +313,327 @@
         <p class="sub">A growing collection of small, useful things - from someone who can't stop building.</p>
     </header>
 
-    <nav class="list" aria-label="Apps">
+    <!-- Personal & Tools -->
+    <section class="category">
+        <div class="category-header">
+            <span class="category-label">Personal & Tools</span>
+            <span class="category-line"></span>
+        </div>
+        <div class="app-grid">
 
-        <!-- 01 Pre-Post -->
-        <a class="item item--featured" href="https://pre-post.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">01</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="6" width="18" height="14" rx="2"/>
-                    <path d="M3 8.5l9 5.5 9-5.5"/>
-                    <path d="M16 3l3 3-3 3"/>
-                    <path d="M19 6h-6"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Pre-Post</p>
-                <p class="item-desc">Anonymous pay-it-forward messages - write one to read one.</p>
-                <span class="item-date">Launch date: 6 Feb 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">pre-post.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card card--featured" href="https://pre-post.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">01</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="6" width="18" height="14" rx="2"/>
+                            <path d="M3 8.5l9 5.5 9-5.5"/>
+                            <path d="M16 3l3 3-3 3"/>
+                            <path d="M19 6h-6"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Pre-Post</p>
+                <p class="card-desc">Anonymous pay-it-forward messages - write one to read one.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 6 Feb 2026</span>
+                    <span class="card-url">pre-post.com</span>
+                </div>
+            </a>
 
-        <!-- 02 Indian Birds -->
-        <a class="item item--featured" href="https://20q.indianbirds.org" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">02</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 14a5 5 0 0 1 8.5-3.5"/>
-                    <circle cx="17" cy="8.5" r="2.5"/>
-                    <path d="M19.5 8l2.5-.5"/>
-                    <circle cx="17.8" cy="7.8" r="0.4" fill="currentColor" stroke="none"/>
-                    <path d="M7 14l-2 3M7 14l2 3"/>
-                    <line x1="3" y1="18" x2="13" y2="18"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">20Qs - Bird ID</p>
-                <p class="item-desc">A 20-questions game for identifying bird species across India.</p>
-                <span class="item-date">Launch date: 25 Feb 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">20q.indianbirds.org</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card" href="https://ftwa.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">06</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="2" width="6" height="4" rx="1"/>
+                            <path d="M12 6v4"/>
+                            <path d="M6 10h12"/>
+                            <path d="M6 10v2M18 10v2"/>
+                            <rect x="3" y="12" width="6" height="4" rx="1"/>
+                            <rect x="15" y="12" width="6" height="4" rx="1"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Family Tree Web App</p>
+                <p class="card-desc">A visual family tree builder - map your roots, branch by branch.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 16 Mar 2026</span>
+                    <span class="card-url">ftwa.shiftingradius.com</span>
+                </div>
+            </a>
 
-        <!-- 03 Snakes of Bangalore -->
-        <a class="item" href="https://snakes.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">03</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 18c1.5-5 4-8 7-7 2 .7 2.5 3.5 1.5 6.5S14 23 17 22c2-.7 4-3.5 4-7 0-3-1.5-5.5-4-7"/>
-                    <path d="M16 7.5l1.5-2.5"/>
-                    <path d="M18 7l1.5-2"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Snakes of Bangalore</p>
-                <p class="item-desc">Interactive field guide to identify common snakes of Bangalore.</p>
-                <span class="item-date">Launch date: 27 Feb 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">snakes.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card card--featured" href="https://lifedesign.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">07</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22V12"/>
+                            <path d="M12 12C12 7 8 4 4 4c0 4 3 7 8 8"/>
+                            <path d="M12 12C12 7 16 4 20 4c0 4-3 7-8 8"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Life Design: Hobby Starter Program</p>
+                <p class="card-desc">A structured self-paced program for people who want to turn a hobby interest into a real, sustained practice.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 22 Mar 2026</span>
+                    <span class="card-url">lifedesign.shiftingradius.com</span>
+                </div>
+            </a>
 
-        <!-- 04 Newsense -->
-        <a class="item item--featured" href="https://newsense.nanusense.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">04</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="4" y="4" width="16" height="16" rx="1.5"/>
-                    <line x1="8" y1="9"  x2="16" y2="9"/>
-                    <line x1="8" y1="13" x2="16" y2="13"/>
-                    <line x1="8" y1="17" x2="12" y2="17"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Newsense</p>
-                <p class="item-desc">One good story, every day - a calm read in a noisy world.</p>
-                <span class="item-date">Launch date: 3 Mar 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">newsense.nanusense.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+        </div>
+    </section>
 
-        <!-- 05 Snake Rescue Archive -->
-        <a class="item" href="https://rescues.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">05</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-                    <path d="M12 13c-1 1.5-1 3.5 1 4.5"/>
-                    <path d="M13 13c1.5.5 3.5-.5 3-2.5"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Snake Rescue Dashboard</p>
-                <p class="item-desc">A living archive of rescue cases and field notes from in and around Kengeri.</p>
-                <span class="item-date">Launch date: 4 Mar 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">rescues.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+    <!-- Games & Puzzles -->
+    <section class="category">
+        <div class="category-header">
+            <span class="category-label">Games & Puzzles</span>
+            <span class="category-line"></span>
+        </div>
+        <div class="app-grid">
 
-        <!-- 06 Family Tree Web App -->
-        <a class="item" href="https://ftwa.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">06</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="2" width="6" height="4" rx="1"/>
-                    <path d="M12 6v4"/>
-                    <path d="M6 10h12"/>
-                    <path d="M6 10v2M18 10v2"/>
-                    <rect x="3" y="12" width="6" height="4" rx="1"/>
-                    <rect x="15" y="12" width="6" height="4" rx="1"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Family Tree Web App</p>
-                <p class="item-desc">A visual family tree builder - map your roots, branch by branch.</p>
-                <span class="item-date">Launch date: 16 Mar 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">ftwa.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card" href="https://20q.indianbirds.org" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">02</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 14a5 5 0 0 1 8.5-3.5"/>
+                            <circle cx="17" cy="8.5" r="2.5"/>
+                            <path d="M19.5 8l2.5-.5"/>
+                            <circle cx="17.8" cy="7.8" r="0.4" fill="currentColor" stroke="none"/>
+                            <path d="M7 14l-2 3M7 14l2 3"/>
+                            <line x1="3" y1="18" x2="13" y2="18"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">20Qs - Bird ID</p>
+                <p class="card-desc">A 20-questions game for identifying bird species across India.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 25 Feb 2026</span>
+                    <span class="card-url">20q.indianbirds.org</span>
+                </div>
+            </a>
 
-        <!-- 07 Life Design: Hobby Starter Program -->
-        <a class="item item--featured" href="https://lifedesign.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">07</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22V12"/>
-                    <path d="M12 12C12 7 8 4 4 4c0 4 3 7 8 8"/>
-                    <path d="M12 12C12 7 16 4 20 4c0 4-3 7-8 8"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Life Design: Hobby Starter Program</p>
-                <p class="item-desc">A structured self-paced program for people who want to turn a hobby interest into a real, sustained practice.</p>
-                <span class="item-date">Launch date: 22 Mar 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">lifedesign.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card card--featured" href="https://decipher.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">11</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Decipher</p>
+                <p class="card-desc">A browser puzzle game with no instructions - every level plays by entirely different rules, and the browser itself is fair game.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 14 May 2026</span>
+                    <span class="card-url">decipher.shiftingradius.com</span>
+                </div>
+            </a>
 
-        <!-- 08 SnakeID -->
-        <a class="item item--featured" href="https://snakeid.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">08</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="7" width="20" height="14" rx="2"/>
-                    <circle cx="12" cy="14" r="3.5"/>
-                    <path d="M16 7l-1-3H9L8 7"/>
-                    <circle cx="17.5" cy="10.5" r="0.75" fill="currentColor" stroke="none"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">SnakeID</p>
-                <p class="item-desc">Upload a photo and identify any snake species in the world, instantly. It's like Shazam for snakes.</p>
-                <span class="item-date">Launch date: 25 Mar 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">snakeid.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card card--featured" href="https://memory.indianbirds.org" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">12</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="9" height="11" rx="1.5"/>
+                            <rect x="13" y="3" width="9" height="11" rx="1.5"/>
+                            <rect x="2" y="16" width="9" height="5" rx="1.5"/>
+                            <rect x="13" y="16" width="9" height="5" rx="1.5"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Birds Memory Card Game</p>
+                <p class="card-desc">A digital memory card game celebrating Indian birds - because learning should be as fun as it is beautiful.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 6 Jun 2026</span>
+                    <span class="card-url">memory.indianbirds.org</span>
+                </div>
+            </a>
 
-        <!-- 09 iCapsule -->
-        <a class="item" href="https://icapsule.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">09</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                    <path d="M3 3v5h5"/>
-                    <path d="M12 7v5l4 2"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">iCapsule</p>
-                <p class="item-desc">Pick any date since 1995 and step back into that exact moment - top songs, news, and what NASA saw that day.</p>
-                <span class="item-date">Launch date: 28 Apr 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">icapsule.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card card--featured" href="https://u2.snanu.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">13</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="9" height="10" rx="1.5"/>
+                            <rect x="13" y="7" width="9" height="10" rx="1.5"/>
+                            <path d="M11 12h2"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">U2</p>
+                <p class="card-desc">A new word puzzle every day. Something is split. Your job is to make it whole again.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 9 Jun 2026</span>
+                    <span class="card-url">u2.snanu.com</span>
+                </div>
+            </a>
 
-        <!-- 10 Namma Ooru -->
-        <a class="item item--featured" href="https://nammaooru.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">10</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                    <circle cx="12" cy="9" r="2.5"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Namma Ooru</p>
-                <p class="item-desc">Your daily Bangalore dashboard - news, weather, traffic, history, facts, and the numbers that run the city.</p>
-                <span class="item-date">Launch date: 30 Apr 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">nammaooru.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card" href="https://dash10.snanu.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">14</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="6" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="13" y2="10"/>
+                            <line x1="3" y1="14" x2="10" y2="14"/>
+                            <line x1="3" y1="18" x2="15" y2="18"/>
+                            <circle cx="20" cy="12" r="3"/>
+                            <path d="M20 9V6"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">DashTen</p>
+                <p class="card-desc">A daily word puzzle - 10 words, one category, just the first letter. Your score is 100 minus the seconds you take.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 15 Jun 2026</span>
+                    <span class="card-url">dash10.snanu.com</span>
+                </div>
+            </a>
 
-        <!-- 11 Decipher -->
-        <a class="item item--featured" href="https://decipher.shiftingradius.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">11</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                    <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Decipher</p>
-                <p class="item-desc">A browser puzzle game with no instructions - every level plays by entirely different rules, and the browser itself is fair game.</p>
-                <span class="item-date">Launch date: 14 May 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">decipher.shiftingradius.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+        </div>
+    </section>
 
-        <!-- 12 Indian Birds Memory Game -->
-        <a class="item" href="https://memory.indianbirds.org" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">12</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="9" height="11" rx="1.5"/>
-                    <rect x="13" y="3" width="9" height="11" rx="1.5"/>
-                    <rect x="2" y="16" width="9" height="5" rx="1.5"/>
-                    <rect x="13" y="16" width="9" height="5" rx="1.5"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">Birds Memory Card Game</p>
-                <p class="item-desc">A digital memory card game celebrating Indian birds - because learning should be as fun as it is beautiful.</p>
-                <span class="item-date">Launch date: 6 Jun 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">memory.indianbirds.org</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+    <!-- Field Guide -->
+    <section class="category">
+        <div class="category-header">
+            <span class="category-label">Field Guide</span>
+            <span class="category-line"></span>
+        </div>
+        <div class="app-grid">
 
-        <!-- 13 U2 -->
-        <a class="item item--featured" href="https://u2.snanu.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">13</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="7" width="9" height="10" rx="1.5"/>
-                    <rect x="13" y="7" width="9" height="10" rx="1.5"/>
-                    <path d="M11 12h2"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">U2</p>
-                <p class="item-desc">A new word puzzle every day. Something is split. Your job is to make it whole again.</p>
-                <span class="item-date">Launch date: 9 Jun 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">u2.snanu.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card" href="https://snakes.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">03</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 18c1.5-5 4-8 7-7 2 .7 2.5 3.5 1.5 6.5S14 23 17 22c2-.7 4-3.5 4-7 0-3-1.5-5.5-4-7"/>
+                            <path d="M16 7.5l1.5-2.5"/>
+                            <path d="M18 7l1.5-2"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Snakes of Bangalore</p>
+                <p class="card-desc">Interactive field guide to identify common snakes of Bangalore.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 27 Feb 2026</span>
+                    <span class="card-url">snakes.shiftingradius.com</span>
+                </div>
+            </a>
 
-        <!-- 14 DashTen -->
-        <a class="item" href="https://dash10.snanu.com" target="_blank" rel="noopener noreferrer">
-            <span class="item-num">14</span>
-            <span class="item-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="6" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="13" y2="10"/>
-                    <line x1="3" y1="14" x2="10" y2="14"/>
-                    <line x1="3" y1="18" x2="15" y2="18"/>
-                    <circle cx="20" cy="12" r="3"/>
-                    <path d="M20 9V6"/>
-                </svg>
-            </span>
-            <div class="item-content">
-                <p class="item-name">DashTen</p>
-                <p class="item-desc">A daily word puzzle - 10 words, one category, just the first letter. Your score is 100 minus the seconds you take.</p>
-                <span class="item-date">Launch date: 15 Jun 2026</span>
-            </div>
-            <div class="item-right">
-                <span class="item-url">dash10.snanu.com</span>
-                <span class="item-arrow">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                </span>
-            </div>
-        </a>
+            <a class="card" href="https://rescues.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">05</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+                            <path d="M12 13c-1 1.5-1 3.5 1 4.5"/>
+                            <path d="M13 13c1.5.5 3.5-.5 3-2.5"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Snake Rescue Dashboard</p>
+                <p class="card-desc">A living archive of rescue cases and field notes from in and around Kengeri.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 4 Mar 2026</span>
+                    <span class="card-url">rescues.shiftingradius.com</span>
+                </div>
+            </a>
 
-    </nav>
+            <a class="card card--featured" href="https://snakeid.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">08</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/>
+                            <circle cx="12" cy="14" r="3.5"/>
+                            <path d="M16 7l-1-3H9L8 7"/>
+                            <circle cx="17.5" cy="10.5" r="0.75" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">SnakeID</p>
+                <p class="card-desc">Upload a photo and identify any snake species in the world, instantly. It's like Shazam for snakes.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 25 Mar 2026</span>
+                    <span class="card-url">snakeid.shiftingradius.com</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Information -->
+    <section class="category">
+        <div class="category-header">
+            <span class="category-label">Information</span>
+            <span class="category-line"></span>
+        </div>
+        <div class="app-grid">
+
+            <a class="card" href="https://newsense.nanusense.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">04</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="16" height="16" rx="1.5"/>
+                            <line x1="8" y1="9"  x2="16" y2="9"/>
+                            <line x1="8" y1="13" x2="16" y2="13"/>
+                            <line x1="8" y1="17" x2="12" y2="17"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Newsense</p>
+                <p class="card-desc">One good story, every day - a calm read in a noisy world.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 3 Mar 2026</span>
+                    <span class="card-url">newsense.nanusense.com</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://icapsule.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">09</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                            <path d="M12 7v5l4 2"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">iCapsule</p>
+                <p class="card-desc">Pick any date since 1995 and step back into that exact moment - top songs, news, and what NASA saw that day.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 28 Apr 2026</span>
+                    <span class="card-url">icapsule.shiftingradius.com</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://nammaooru.shiftingradius.com" target="_blank" rel="noopener noreferrer">
+                <span class="card-num">10</span>
+                <div class="card-top">
+                    <span class="card-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                            <circle cx="12" cy="9" r="2.5"/>
+                        </svg>
+                    </span>
+                </div>
+                <p class="card-name">Namma Ooru</p>
+                <p class="card-desc">Your daily Bangalore dashboard - news, weather, traffic, history, facts, and the numbers that run the city.</p>
+                <div class="card-footer">
+                    <span class="card-date">Launch date: 30 Apr 2026</span>
+                    <span class="card-url">nammaooru.shiftingradius.com</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
 
     <footer>
         <span class="footer-note">2026</span>
