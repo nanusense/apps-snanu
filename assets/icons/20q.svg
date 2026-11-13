@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- background -->
+  <rect width="32" height="32" rx="7" fill="#2d6a4f"/>
+  <!-- tail -->
+  <path d="M5 22 Q7 18 10 20" fill="white"/>
+  <!-- body -->
+  <ellipse cx="17" cy="19" rx="8" ry="5.5" fill="white"/>
+  <!-- head -->
+  <circle cx="24" cy="13" r="4.5" fill="white"/>
+  <!-- beak -->
+  <path d="M27.5 12.5 L31 13.5 L27.5 14.5 Z" fill="white"/>
+  <!-- eye -->
+  <circle cx="25" cy="13" r="1.2" fill="#2d6a4f"/>
+  <!-- wing hint -->
+  <path d="M11 17 Q15 14 21 16" stroke="#2d6a4f" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+</svg>
